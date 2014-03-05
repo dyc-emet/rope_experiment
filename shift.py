@@ -90,7 +90,7 @@ def mulm(a, M):
 
 def shift(r):
     for i in range(len(r)):
-        r[i][0] = r[i][2] * (r[i][2] - 8) / 2
+        r[i][0] = r[i][2] * (r[i][2] - 8) / 3
     return r
 
 def mulvm(M, L):
@@ -105,7 +105,7 @@ def mulvm(M, L):
 def square(u):
     return (u[0] ** 2 + u[1] ** 2 + u[2] ** 2)
 def f(l1, l2, l01, l02, c, d):
-    K = 50
+    K = 80
     s = K * (c * (1 - sqrt(square(l01) / square(l1))) - d * (1 - sqrt(square(l02) / square(l2))))
     return s
 def fc(u, u0, F, N = 5):
@@ -160,7 +160,7 @@ def balance(K, Fc, N = 5):
 
 n = int(input('n:'))
 THETA = int(input('theta(multiple of 5):'))
-radius = 0.5
+radius = 0.4
 rc = rcc(n)
 rc = shift(rc)
 phi = blank(n)
@@ -198,7 +198,7 @@ for theta in range(2, THETA + 2, 2):
     vc = blank(n)
     Om = blank(n)
     for j in range(4):
-        rr[0][j] = rotatez(rr[0][j], pi / 180.0)
+        rr[0][j] = rotatez(rr[0][j], pi / 180)
         rr[n-1][j] = rotatez(rr[n-1][j], -pi / 180)
     uc(u, rc, rr, n)
     #print(rc)
@@ -233,10 +233,11 @@ for theta in range(2, THETA + 2, 2):
                 S += p
             show(S)'''
             print('BALANCE! when theta is', theta, 'num is', num)
-            print('rc:', rc)
-            print('rr:', rr)
-            print('Fc:', Fc)
-            print('K:', K)
+            if theta % 10 == 0:
+                print('rc:', rc)
+                print('rr:', rr)
+                print('Fc:', Fc)
+                print('K:', K)
             print('\n')
             break
         #else :
