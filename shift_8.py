@@ -110,7 +110,7 @@ def f(u1, u2, u01, u02, order, k):
     for i in [0, 1, 2, 3]:
         s += K * (u1[i][order][k] * (1 - sqrt(square(u01[i][order]) / square(u1[i][order]))))
     for i in [0, 1, 2, 3]:
-        s -= K * (u1[order][i][k] * (1 - sqrt(square(u01[order][i]) / square(u1[order][i]))))
+        s -= K * (u2[order][i][k] * (1 - sqrt(square(u02[order][i]) / square(u2[order][i]))))
     return s
 def fc(u, u0, F, N = 5):
     for i in range(1, N-1):
@@ -161,7 +161,7 @@ def balance(K, Fc, N = 5):
         tmp1 = square(K[i])
         tmp2 = square(Fc[i])
         #print(tmp)
-        if tmp1 > 0.0004 or tmp2 > 0.0004:
+        if tmp1 > 0.0016 or tmp2 > 0.0016:
             sign = 0
             break
     return sign
@@ -211,9 +211,12 @@ for theta in range(2, THETA + 2, 2):
     uc(u, rc, rr, n)
     #print(rc)
     #print(rr)
-    #print(u)
     fc(u, u0, F, n)
     K = kc(rr, F)
+    #print('K:', K)
+    #print('rr:', rr)
+    #print('u:', u)
+    #print('F:', F)
     Kn = kc(rr, Fn)
     Fc = fcc(F)
     #print('OK')
@@ -270,7 +273,7 @@ for theta in range(2, THETA + 2, 2):
         #print(deltaphi)
         #print(rc)
         #print(u)
-        #print(Fn)
+        #print('Kn:', Kn)
         #print(Kn)
         #print('\n')
         Fcn = fcc(Fn)
